@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace Assignment3
+namespace LearningLog2024
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,0 +1,179 @@
+﻿<Window x:Class="LearningLog2024.EntryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Learning Log"
+        MinHeight="350" Height="450"
+        MinWidth="450" Width="500"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="40" MinHeight="30" />
+        </Grid.RowDefinitions>
+
+        <!-- Single TabControl -->
+        <TabControl x:Name="tabController" SelectionChanged="TabChanged" RenderTransformOrigin="0.727,0.627">
+
+            <!-- Audio Entry Tab -->
+            <TabItem x:Name="tabAudioEntry" Header="_Audio Entry" ToolTip="Create a new audio entry">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" MinHeight="50" />
+                        <RowDefinition Height="1*" MinHeight="40" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="3*" MinHeight="50" />
+                        <RowDefinition Height="1*" MinHeight="50" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Buttons -->
+                    <Button x:Name="buttonRecordAudio" Grid.Column="0" Grid.Row="0" Width="120" Margin="5" Click="RecordClick" ToolTip="Click to start the audio recording">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label FontFamily="Segoe UI Symbol" FontSize="20" Content="&#xE1D6;" Grid.Column="0" HorizontalAlignment="Right" />
+                            <Label Content="_Record" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="buttonPlayAudio" Grid.Column="1" Grid.Row="0" Width="120" Margin="5" IsEnabled="False" Click="PlayClick" ToolTip="Play the recorded audio">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label FontFamily="Segoe UI Symbol" FontSize="20" Content="&#xE102;" Grid.Column="0" HorizontalAlignment="Right" />
+                            <Label Content="_Play" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="buttonDeleteAudio" Grid.Column="2" Grid.Row="0" Width="120" Margin="5" IsEnabled="False" Click="DeleteClick" ToolTip="Delete the audio recording">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label FontFamily="Segoe UI Symbol" FontSize="20" Content="&#xE107;" Grid.Column="0" HorizontalAlignment="Right" />
+                            <Label Content="_Delete" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Combo Boxes-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                        <Label Content="Wellness:" Margin="5" />
+                        <ComboBox x:Name="comboWellnessAudio" Margin="5" MinWidth="50" ToolTip="Select a wellness rating" IsEditable="False" />
+                        <Label Content="_Quality:" Margin="5" />
+                        <ComboBox x:Name="comboQualityAudio" Margin="5" MinWidth="50" ToolTip="Select a quality rating" IsEditable="False" />
+                    </StackPanel>
+
+                    <!-- Notes -->
+                    <Label Content="_Notes:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" />
+                    <TextBox x:Name="textNotesAudio" Grid.ColumnSpan="3" Grid.Row="3" Margin="5" ToolTip="Enter notes about this entry" />
+
+                    <!-- Save Button -->
+                    <Button x:Name="buttonSaveAudio" Grid.Column="1" Grid.Row="4" Width="120" Margin="5" IsEnabled="False" Click="SaveClick" ToolTip="Save this entry">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label FontFamily="Segoe UI Symbol" FontSize="20" Content="&#xE105;" Grid.Column="0" HorizontalAlignment="Right" />
+                            <Label Content="Sa_ve" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+            <!-- Text Entry Tab -->
+            <TabItem x:Name="tabTextEntry" Header="_Text Entry" ToolTip="Create a new text entry">
+                <Grid>
+                    <!-- Similar structure as the Audio Entry Tab -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="27*" />
+                        <ColumnDefinition Width="118*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="14*" />
+                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="165*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" MinHeight="50" />
+                        <RowDefinition Height="1*" MinHeight="40" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="3*" MinHeight="50" />
+                        <RowDefinition Height="1*" MinHeight="50" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="textNotesText" Grid.ColumnSpan="6" Grid.Row="2" Margin="5,15,5,25" ToolTip="Enter notes for text entry" Grid.RowSpan="2" />
+                    <Button x:Name="buttonSaveText" Content="Save Text" Grid.Column="4" Grid.Row="3" Width="120" Margin="15,169,15,11" Click="SaveTextClick" FontSize="13" Grid.RowSpan="2" />
+                    <Label Content="Add text in the box given below" FontSize="13
+                           " HorizontalAlignment="Left" Margin="8,45,0,0" VerticalAlignment="Top" Height="27" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="194" Grid.Row="1"/>
+                    <ComboBox Name ="comboQualityText"  Grid.Column="1" Margin="98,14,110,14" Grid.ColumnSpan="4"/>
+                    <ComboBox Name ="comboWellnessText" Grid.Column="5" Margin="45,14,25,14"/>
+
+                    <Label Content="QUALITY " Margin="24,11,25,12" Grid.Column="1"/>
+                    <Label Content="WELLNESS " Margin="109,12,125,11" Grid.Column="4" Grid.ColumnSpan="2"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Summary Tab -->
+            <TabItem x:Name="tabSummary" Header="_Summary" ToolTip="View the summary" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name ="labelNumberofEntries" Content="Number of entries: " Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="textNumberOfEntries" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="50" IsReadOnly="True" ToolTip="Displays the number of entries so far"/>
+                    <Label Name="labelFirstEntryName" Content="First entry: " Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="textFirstEntry" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="50" IsReadOnly="True" ToolTip="Displays the first entry's date"/>
+                    <Label Name="labelNewEntryName" Content="Newest entry: " Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="textNewestEntry" Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="50" IsReadOnly="True" ToolTip="Displays the newest entry's date"/>
+                </Grid>
+
+            </TabItem>
+
+            <!-- List Tab -->
+            <TabItem x:Name="tabList" Header="_List" ToolTip="View past entries">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="79*"/>
+                        <ColumnDefinition Width="168*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="listViewEntries"  DisplayMemberPath="ToString" Grid.ColumnSpan="2" Margin="0,0,0,87">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Date" DisplayMemberBinding="{Binding EntryDate}" />
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding LogId}" />
+                                <GridViewColumn Header="Wellness" DisplayMemberBinding="{Binding Wellness}" />
+                                <GridViewColumn Header="Quality" DisplayMemberBinding="{Binding Quality}" />
+                                <GridViewColumn Header="Notes" DisplayMemberBinding="{Binding Notes}" />
+                            </GridView>
+                        </ListView.View>
+
+                    </ListView>
+                    <Button Name="listbuttonEdit" Content="Edit" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Width="80" Height="45" Click="listbuttonEdit_Click"/>
+                    <Button Name="listbuttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="233,307,0,0" VerticalAlignment="Top" Grid.Column="1" Width="80" Height="45" Click="listbuttonDelete_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar Grid.Row="1">
+            <StatusBarItem x:Name="statusState" />
+        </StatusBar>
+    </Grid>
+</Window>

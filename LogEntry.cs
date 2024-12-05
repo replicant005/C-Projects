@@ -1,83 +1,139 @@
-﻿/* Author : mehak kapur
- * created : October 29th, 2024
- * Description : this class is for the entry in the learning log
- */
+﻿// Author:  Kyle Chapman
+// Created: October 31, 2024
+// Updated: November 12, 2024
+// Description:
+// Represents an entry in a learning log program with properties for
+// notes on the entry, a state of wellness, a state of quality,
+// as well as a filepath to a recording.
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
-namespace Assignment3
+namespace LearningLog2024
 {
-    internal class LogEntry
+    internal abstract class LogEntry
     {
-        //static variables :
-        private static int count = 0;
-        private static DateTime firstEntry;
-        private static DateTime newEntry;
-        //instance variables
-        private int logId;
-        private DateTime logDate = DateTime.Now;
-        private int logWellness;
-        private int logQuality;
-        private string logNotes = String.Empty;
-        private FileInfo logFile = null;
+        #region "Variable declarations"
+        // i wont be able to access these for my newest and first entry date hence i am going to make these public ; and i dont think they should be static 
+        //// Static variables.
+        //protected static int count = 0;
+        //protected static DateTime firstEntry;
+        //protected static DateTime newestEntry;
 
-        // Constructors  
-        // constructor that sets the logId and count
-        public LogEntry() { 
-            // update the static variables
-            count++;
-            logId = count;
-        }
-        /// <summary>
-        /// Parameterized constructor to create new log entry objects
-        /// </summary>
-        /// <param name="wellnessValue">A wellness value between 1 and 5</param>
-        /// <param name="qualityValue">A quality value between 1 and 5</param>
-        /// <param name="notesValue">ANotes for this logEntry</param>
-        /// <param name="fileValue">File path to the recording</param>
-        public LogEntry(int wellnessValue, int qualityValue, string notesValue, FileInfo fileValue) 
+
+
+
+        // we made these static as they are used for the dat of the class and are specifying those atrtibutes 
+        // as count keeps a track of all the entries that are being inherited from taht class
+        // firstEntry , newestEntry are based on class as in their value update with every instance made , they are not particular to every instance made , they rather belong to the class 
+        // for a static variable , if i have assigned it a value ,that value will reamin the same in all instances of that class, objects instaiated from that cannot havevdifferent value for static variable
+        
+        protected static int count = 0;
+        public static DateTime firstEntry;
+        public static DateTime newestEntry;
+
+        // Instance variables.
+        protected int logId;
+        protected DateTime logDate = DateTime.Now;
+        protected int logWellness;
+        protected int logQuality;
+        protected string logNotes = String.Empty;
+
+        // Static list of entries 
+        protected internal static List<LogEntry> logEntryList = new List<LogEntry>();
+
+        #endregion
+
+        #region "Constructors"
+        // *** even though i tried by using the list constructor in the constructor for audio and text entries it still didnt work the  way wanted it to
+        protected LogEntry()
         {
-            count++;
-            if (count == 0)
-            {
-                firstEntry = DateTime.Now;
-            }
-            newEntry = DateTime.Now;
-            // set values for instance properties
-            logId = count;  
-            Wellness = wellnessValue;
-            Quality = qualityValue;
-            Notes = notesValue;
-            File = fileValue;           
+             
         }
 
+        #endregion
 
-        //properties:
-        public int Id { get => logId; private set { logId = value; } } //get to reference the variable, set property as whatever id will be assigned 
-        public DateTime EntryDate { get => logDate; private set {logDate = value; } }
-        public int Wellness { get => logWellness; private set { logWellness = value; } }
-        public int Quality { get => logQuality; private set {logQuality = value; } }    
-        public string Notes { get => logNotes;  private set {logNotes = value; } }  
-        public FileInfo File { get => logFile; private set {logFile = value; } }
+        #region "Properties"
+        /// <summary>
+        /// Sets or accesses the log's unique identifier.
+        /// </summary>
+        protected internal int Id { get => logId; private set
+            {
+                logId = value;
+            }
+        }
 
-        // get the total number of log entries
-        public static int Count => count;
-        // get the first log entry's date 
-        public static DateTime FirstEntry => firstEntry;
-        // get the most recent log entry's date 
-        public static DateTime NewEntry => newEntry;
+        /// <summary>
+        /// Date indicating when the audio was recorded accessed.
+        /// </summary>
+        protected internal DateTime EntryDate { get => logDate; set { logDate = value; } }
 
-        // methods :
-        // to display a log entry as a string
+        /// <summary>
+        /// Number based on the “Wellness/Mood” ComboBox.;
+        /// </summary>
+        protected internal int Wellness { get => logWellness; set {
+                if (value < 1 || value > 5)
+                    throw new ArgumentOutOfRangeException(nameof(Wellness), "Wellness rating must be between 1 and 5.");
+                logWellness = value; } }
+
+        /// <summary>
+        /// Number based on the “Quality” ComboBox.;
+        /// </summary>
+        protected internal int Quality { get => logQuality; set {
+                if (value < 1 || value > 5)
+                    throw new ArgumentOutOfRangeException(nameof(Quality), "Quality rating must be between 1 and 5.");
+                logQuality = value; } }
+
+        /// <summary>
+        /// Piece of text from the “notes” TextBox; notes about the log entry.
+        /// </summary>
+        protected internal string Notes
+        {
+            get => logNotes;
+            set
+            {
+                if (value.Trim().Length > 0)
+                { 
+                    logNotes = value;
+                }
+                else
+                {
+                    MessageBox.Show("The notes have been left blank.","Entry Error");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Notes the file location of the audio file for the log entry.
+        /// </summary>
+
+        /// <summary>
+        /// Get the total number of log entries.
+        /// </summary>
+        protected internal static int Count => count;
+
+        /// <summary>
+        /// Get the first log entry's date.
+        /// </summary>
+        protected internal static DateTime FirstEntry => firstEntry;
+
+        /// <summary>
+        /// Get the most recent log entry's date.
+        /// </summary>
+        protected internal static DateTime NewestEntry => newestEntry;
+        #endregion
+
+        protected internal static List<LogEntry> List { get { return logEntryList; } }
+
+        #region "Methods"
+        /// <summary>
+        /// Displays a log entry as a string
+        /// </summary>
+        /// <returns>Log entry as a string</returns>
         public override string ToString()
         {
-            return "Entry " + Id + "created at "  + EntryDate.ToString();
+            return "Entry " + Id + " created at " + EntryDate.ToString();
         }
-
+        #endregion
     }
 }

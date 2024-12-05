@@ -11,7 +11,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 // Note to students: you are likely to need to change this namespace to match your project.
-namespace Assignment3
+namespace LearningLog2024
 {
     internal static class RecordWav
     {
@@ -33,28 +33,20 @@ namespace Assignment3
         /// </summary>
         /// <returns>A FileInfo object pointing to the resulting .wav file.</returns>
         internal static FileInfo EndRecording()
-
         {
-            string directoryPath = @"C:\Users\mehak\source\repos\Assignment3\Recordings";
-            if (!Directory.Exists(directoryPath))
+            if (!Directory.Exists(Environment.CurrentDirectory + "\\Files"))
             {
-                Directory.CreateDirectory(directoryPath);
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\Files");
             }
 
-            string fileName = directoryPath + "\\Recording" + DateTime.Now.ToString("yyyyMMdd") + ".wav";
-
-            int fileCounter = 0;
-            while (File.Exists(fileName))
-            {
-                fileName = directoryPath + "\\Recording" + DateTime.Now.ToString("yyyyMMdd") + "_" + fileCounter.ToString("D2") + ".wav";
-                fileCounter++;
-            }
+            string fileName = Environment.CurrentDirectory + "\\Files\\Log" + DateTime.Now.ToString("MMddyyHHmmss") + ".wav";
             
             mciSendString("save recsound " + fileName, "", 0, 0);
             mciSendString("close recsound ", "", 0, 0);
 
             FileInfo returnFile = new FileInfo(fileName);
             return returnFile;
+
         }
 
     }
