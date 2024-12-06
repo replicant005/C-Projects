@@ -20,7 +20,7 @@ namespace LearningLog2024
         private static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
         /// <summary>
-        /// Begins a .wav file recording using winmm.dll .
+        /// Begins a .wav file recording using winmm.dll
         /// </summary>
         internal static void StartRecording()
         {
@@ -38,7 +38,6 @@ namespace LearningLog2024
             {
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\Files");
             }
-
             string fileName = Environment.CurrentDirectory + "\\Files\\Log" + DateTime.Now.ToString("MMddyyHHmmss") + ".wav";
             
             mciSendString("save recsound " + fileName, "", 0, 0);
@@ -48,6 +47,7 @@ namespace LearningLog2024
             return returnFile;
 
         }
+
 
     }
 }

@@ -14,8 +14,26 @@
             <RowDefinition Height="40" MinHeight="30" />
         </Grid.RowDefinitions>
 
+        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Save" Click="MenuSave_Click" ToolTip="save the current entry">
+                </MenuItem>
+                <MenuItem Header="E_xit" Click="MenuExit_Click" ToolTip="exit the application">
+
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Edit"  ToolTip="Save this entry">
+                <MenuItem Header="_Clear Inputs" Click="MenuClearInputs_Click" ToolTip="Clear all inputs"/>
+                <MenuItem Header="Clear _List" Click="MenuClearList_Click" ToolTip="Clear the entry list"/>
+            </MenuItem>
+            <MenuItem Header="_Help"  ToolTip="Save this entry">
+                <MenuItem Header="_About" Click="MenuAbout_Click"/>
+            </MenuItem>
+        </Menu>
+
+
         <!-- Single TabControl -->
-        <TabControl x:Name="tabController" SelectionChanged="TabChanged" RenderTransformOrigin="0.727,0.627">
+        <TabControl x:Name="tabController" SelectionChanged="TabChanged" RenderTransformOrigin="0.727,0.627" Margin="0,23,0,7">
 
             <!-- Audio Entry Tab -->
             <TabItem x:Name="tabAudioEntry" Header="_Audio Entry" ToolTip="Create a new audio entry">
@@ -113,9 +131,9 @@
                         <RowDefinition Height="1*" MinHeight="50" />
                     </Grid.RowDefinitions>
                     <TextBox x:Name="textNotesText" Grid.ColumnSpan="6" Grid.Row="2" Margin="5,15,5,25" ToolTip="Enter notes for text entry" Grid.RowSpan="2" />
-                    <Button x:Name="buttonSaveText" Content="Save Text" Grid.Column="4" Grid.Row="3" Width="120" Margin="15,169,15,11" Click="SaveTextClick" FontSize="13" Grid.RowSpan="2" />
+                    <Button x:Name="buttonSaveText" Content="Save Text" Grid.Column="4" Grid.Row="4" Width="120" Margin="20,14,10,13" Click="SaveTextClick" FontSize="13" />
                     <Label Content="Add text in the box given below" FontSize="13
-                           " HorizontalAlignment="Left" Margin="8,45,0,0" VerticalAlignment="Top" Height="27" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="194" Grid.Row="1"/>
+                           " HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="27" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="194" Grid.Row="1"/>
                     <ComboBox Name ="comboQualityText"  Grid.Column="1" Margin="98,14,110,14" Grid.ColumnSpan="4"/>
                     <ComboBox Name ="comboWellnessText" Grid.Column="5" Margin="45,14,25,14"/>
 
@@ -151,10 +169,12 @@
             <TabItem x:Name="tabList" Header="_List" ToolTip="View past entries">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="79*"/>
-                        <ColumnDefinition Width="168*"/>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="122*"/>
+                        <ColumnDefinition Width="336*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView Name="listViewEntries"  DisplayMemberPath="ToString" Grid.ColumnSpan="2" Margin="0,0,0,87">
+                    <ListView Name="listViewEntries" SelectionMode="Single" DisplayMemberPath="Notes" Grid.ColumnSpan="4" Margin="0,0,0,87">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Date" DisplayMemberBinding="{Binding EntryDate}" />
@@ -166,8 +186,8 @@
                         </ListView.View>
 
                     </ListView>
-                    <Button Name="listbuttonEdit" Content="Edit" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Width="80" Height="45" Click="listbuttonEdit_Click"/>
-                    <Button Name="listbuttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="233,307,0,0" VerticalAlignment="Top" Grid.Column="1" Width="80" Height="45" Click="listbuttonDelete_Click"/>
+                    <Button Name="listbuttonEdit" Content="Edit" HorizontalAlignment="Left" Margin="9,267,0,0" VerticalAlignment="Top" Width="80" Height="45" Click="listbuttonEdit_Click" Grid.ColumnSpan="2" Grid.Column="1" ToolTip="edit an entry in the list"/>
+                    <Button Name="listbuttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="219,267,0,0" VerticalAlignment="Top" Grid.Column="3" Width="80" Height="45" Click="listbuttonDelete_Click" ToolTip="delete an entry from the list"/>
                 </Grid>
             </TabItem>
         </TabControl>
@@ -177,3 +197,6 @@
         </StatusBar>
     </Grid>
 </Window>
+
+    
+    

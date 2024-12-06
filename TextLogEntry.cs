@@ -53,7 +53,7 @@ namespace LearningLog2024
                 Wellness = wellnessValue;
                 Quality = qualityValue;
                 TextEntered = TextValue;
-                Entries.Add(this);
+            LogEntry.List.Add(new LogData.Data { Id = logId, Wellness = Wellness, Quality = Quality, EntryDate = newestEntry, Notes = Notes });
 
         }
             #endregion

@@ -60,29 +60,30 @@ namespace LearningLog2024
             Quality = qualityValue;
             Notes = notesValue;
             RecordingFile = fileValue;
-            logEntryList.Add(this);     
+            LogEntry.List.Add(new LogData.Data { Id = logId, Wellness = Wellness, Quality = Quality, EntryDate = newestEntry, Notes = Notes });
         }
+    
 
-        #endregion
+    #endregion
 
-        #region "Properties"
-        /// <summary>
-        /// Notes the file location of the audio file for the log entry.
-        /// </summary>
-        internal FileInfo RecordingFile { get => logFile; set { logFile = value; } }
-        #endregion
+    #region "Properties"
+    /// <summary>
+    /// Notes the file location of the audio file for the log entry.
+    /// </summary>
+    internal FileInfo RecordingFile { get => logFile; set { logFile = value; } }
+    #endregion
 
-        #region "Methods" 
-        /// <summary>
-        /// Displays a log entry as a string
-        /// </summary>
-        /// <returns>Log entry as a string</returns>
-        public override string ToString()
-        {
-            return base.ToString() + " Audio";  // uses base class to string method and concatinates it with "audio"
-        }
+    #region "Methods" 
+    /// <summary>
+    /// Displays a log entry as a string
+    /// </summary>
+    /// <returns>Log entry as a string</returns>
+    public override string ToString()
+    {
+        return base.ToString() + " Audio";  // uses base class to string method and concatinates it with "audio"
+    }
 
-        #endregion 
+    #endregion
 
 
     }

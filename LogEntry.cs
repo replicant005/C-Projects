@@ -32,23 +32,25 @@ namespace LearningLog2024
         public static DateTime firstEntry;
         public static DateTime newestEntry;
 
+        // Static list to store log entries
+        protected internal static List<LogData.Data> List { get; } = new List<LogData.Data>();
+
+
+
         // Instance variables.
         protected int logId;
         protected DateTime logDate = DateTime.Now;
         protected int logWellness;
         protected int logQuality;
         protected string logNotes = String.Empty;
-
-        // Static list of entries 
-        protected internal static List<LogEntry> logEntryList = new List<LogEntry>();
-
         #endregion
 
         #region "Constructors"
         // *** even though i tried by using the list constructor in the constructor for audio and text entries it still didnt work the  way wanted it to
-        protected LogEntry()
+        public LogEntry()
         {
-             
+            count++;
+            logId = count;
         }
 
         #endregion
@@ -123,7 +125,7 @@ namespace LearningLog2024
         protected internal static DateTime NewestEntry => newestEntry;
         #endregion
 
-        protected internal static List<LogEntry> List { get { return logEntryList; } }
+  
 
         #region "Methods"
         /// <summary>
